@@ -37,6 +37,7 @@ const Employees = () => {
                 </div>
             </div>
             <div className="col-md-3">
+                {/* displaying selected employees */}
                 <SelectedEmployees selectedEmployees={selectedEmployees}></SelectedEmployees>
             </div>
         </div>

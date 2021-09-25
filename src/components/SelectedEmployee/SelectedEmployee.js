@@ -1,6 +1,7 @@
 import React from 'react';
 
 const SelectedEmployee = (props) => {
+    // Destructuring Employee object
     const {img, name, salary} = props.employee;
     return (
         <div className="d-flex align-items-center shadow-sm mt-3 px-2">
