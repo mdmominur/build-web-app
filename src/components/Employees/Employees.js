@@ -1,29 +1,44 @@
 import React, { useEffect, useState } from 'react';
+import Employee from '../Employee/Employee';
+import SelectedEmployees from '../SelectedEmployees/SelectedEmployees';
 
 const Employees = () => {
+    // initializing Emplyee state
    const [employees, setEmployees] = useState([]);
+
+   //Selected Employee list
+   const [selectedEmployees, setSelectedEmployees] = useState([]);
+
+   //Fetching employee data
    useEffect(()=>{
        fetch('/data.JSON')
        .then(res => res.json())
-       .then(data => console.log(data))
+       .then(data => setEmployees(data))
    }, []);
+
+   //Selecting employees 
+   const handleAddToList = employee => {
+    //checking duplicate
+    const check = selectedEmployees.find(e => e.key === employee.key);
+    if(!check){
+        // Adding new employee to the list
+        const newEmployeeAddedList = [...selectedEmployees, employee];
+        setSelectedEmployees(newEmployeeAddedList);
+    }
+   }
     return (
         <div className="row mt-5">
             <div className="col-md-9">
                 <div className="row">
-                    <div className="col-md-4">
-                    <div class="card" >
-                        <img src="" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="/home" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                        </div>
-                    </div>
+                    {
+                        // Displaying Employees
+                        employees.map(employee => <Employee key={employee.key} handleAddToList={handleAddToList} employee={employee}></Employee>)
+                    }
                 </div>
             </div>
-            <div className="col-md-3"></div>
+            <div className="col-md-3">
+                <SelectedEmployees selectedEmployees={selectedEmployees}></SelectedEmployees>
+            </div>
         </div>
     );
 };
