@@ -6,7 +6,7 @@ Project Link: https://build-webapp-mominur.netlify.app/
 
 ### `* See Employees`
 
-`point* Test`
+* `point* Test`
 
 You can see all the employees and their basic details. 
 
